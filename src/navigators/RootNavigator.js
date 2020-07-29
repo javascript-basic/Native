@@ -23,7 +23,11 @@ const TaskStack = createStackNavigator();
 function TasksStackScreen() {
   return (
     <TaskStack.Navigator>
-      <TaskStack.Screen name="Tasks" component={TasksScreen} />
+      <TaskStack.Screen
+        name="Tasks"
+        component={TasksScreen}
+        style={{ background: "#FF8000" }}
+      />
       <TaskStack.Screen name="Details" component={TasksDetailsScreen} />
     </TaskStack.Navigator>
   );
@@ -75,9 +79,9 @@ export default function App() {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="List" component={ListStackScreen} />
         <Tab.Screen name="Tasks" component={TasksStackScreen} />
         <Tab.Screen name="Finished" component={FinishedStackScreen} />
+        <Tab.Screen name="List" component={ListStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
