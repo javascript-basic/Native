@@ -1,46 +1,37 @@
 import * as React from "react";
 import { Button, Text, View } from "react-native";
-import { Fab, Icon } from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
-const AddTodoButton = ({ onPress }) => (
-  <Fab
-    direction="up"
-    containerStyle={{}}
-    style={{
-      backgroundColor: "#ffff",
-    }}
-    position="bottomRight"
-    onPress={onPress}
-  >
-    <MaterialIcons
-      name="add"
-      style={{ color: "#FF8000", fontSize: 40, paddingTop: 12 }}
-    />
-  </Fab>
-);
+import { createStackNavigator } from "@react-navigation/stack";
+class TasksScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Tasks Screen</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate("Details")}
+        />
+      </View>
+    );
+  }
+}
 
-export function TasksDetailsScreen() {
+class TasksDetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+
+const TaskStack = createStackNavigator();
+function TasksStackScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Details!</Text>
-    </View>
+    <TaskStack.Navigator>
+      <TaskStack.Screen name="Công Việc Đang Làm" component={TasksScreen} />
+      <TaskStack.Screen name="Details" component={TasksDetailsScreen} />
+    </TaskStack.Navigator>
   );
 }
-export function TasksScreen({ navigation }) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Settings screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate("Details")}
-      />
-      <AddTodoButton />
-    </View>
-  );
-}
+export default TasksStackScreen;

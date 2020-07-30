@@ -1,21 +1,50 @@
 import * as React from "react";
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, ScrollView, StyleSheet } from "react-native";
+import AddTodoButton from "./../component/AddTodoButton";
+import AddTodo from "./../component/AddTodo";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export function ListDetailsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Details!</Text>
-    </View>
-  );
+class ListScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>List Screen</Text>
+
+        <AddTodoButton
+          onPress={() => this.props.navigation.navigate("Details")}
+        />
+      </View>
+    );
+  }
 }
-export function ListScreen({ navigation }) {
+
+class ListDetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+const ListStack = createStackNavigator();
+function ListStackScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>List screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate("Details")}
+    <ListStack.Navigator>
+      <ListStack.Screen
+        name="Danh Sách Công Việc"
+        component={ListScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#81BEF7",
+          },
+          // cardStyle: {
+          //   backgroundColor: "#F7BE81",
+          // },
+        }}
       />
-    </View>
+      <ListStack.Screen name="Details" component={ListDetailsScreen} />
+    </ListStack.Navigator>
   );
 }
+export default ListStackScreen;
